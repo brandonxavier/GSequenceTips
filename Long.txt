@@ -1,0 +1,55 @@
+== This app is a collaborative work of Cliche123 and Nolidoux ==
+* How it works:
+You set a value for your goal then members must tip in ascending order (1, then 2, etc) until they reach the goal, or in descending order (10, 9, 8, etc) until they reach 0.
+The total of tokens needed to reach a goal is equal to: goal * (goal + 1 ) / 2
+That means the total of tokens gets big VERY fast when you put a high goal.
+Here are the total tokens needed for some goal values:
+5 => 15
+10 => 55
+15 => 120
+20 => 210
+25 => 325
+30 => 465
+35 => 630
+40 => 820
+45 => 1035
+50 => 1275
+55 => 1540
+60 => 1830
+65 => 2145
+70 => 2485
+75 => 2850
+80 => 3240
+90 => 4095
+95 => 4560
+100 => 5050
+
+* ChangeLog:
+X Removed highlight on last tipper (I find it annoying)
+X Removed unused code, simplified some parts
+X Clarified goal text
+X goal_description limited to 190 characters since we add stuff behind (but does it really matter if it goes beyond 255?)
+X Changed panel to use 3_rows_of_labels
+X When goal is reached, display something
+(NEW) Option for descending tips
+(NEW) Update bottom panel when goal is reached
+(NEW) Don't update last_tip_username when tip was not counted
+* In progress:
+~ Chat notice when tips are sent after goal was reached (less intrusive than a goal update) (optional)
+~ Display message when tip is too low to count (and explain why)
+~ Send a chat notice to the performer after the app starts telling the total token needed for the chosen goal
+~ Write total tokens needed to reach the goal in the bottom panel (optional)
+* To do:
+- When a tip is big enough to cover several values, send a chat notice to say which values were validated
+- new order option: any order (validate the closest number equal or below the tip until all values in the range are validated)
+- if the last tip is too low to be accepted, send a notice to the tipper and give him a short time to complete his tip to match the minimum (tips from that user will be accumulated until time runs out or his tips reach the minimum required)
+- debug command: dump version/time, goal, next tip, last tipper, order (asc/desc).
+- Introduction text (chat notices) when app is launched to explain basic stuff (e.g. version, debug command...) (optional)
+- Clean the code more (checking the goal reach is done in several places and unneeded function calls occur, onTip could handle all)
+- Chat notice telling what numbers have been covered by the tip (optional) [e.g. next tip needed = 1, you tip 8, you get a message saying "Your tip covered numbers from 1 to 3" (and you wasted some)]
+- Choice for highlighting or not of the last tipper or biggest tipper
+- Allow the model to start at a higher value than 1 (in case previous goal was interrupted)
+- Allow to accept (or not) tips below the next tip needed
+- Reject tip that are too low? Force tip values? (this needs an API update)
+- Show the tip total in the settings box when the goal is set (not possible with the current API)
+- Test it
