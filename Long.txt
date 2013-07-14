@@ -1,4 +1,11 @@
 == This app is a collaborative work of Cliche123 and Nolidoux ==
+    - Minor graphic additions made by brandonxavier -- all credit and acclaim should
+      go to the original authors.  All my sources are available at https://github.com/brandonxavier
+
+NEW: While the app is running, the broadcaster may type /gon or /goff to enable or disable graphic
+     emotes for the next tip needed.
+
+
 * How it works:
 You set a value for your goal then members must tip in ascending order (1, then 2, etc) until they reach the goal, or in descending order (10, 9, 8, etc) until they reach 0.
 The total of tokens needed to reach a goal is equal to: goal * (goal + 1 ) / 2
@@ -31,6 +38,8 @@ X Clarified goal text
 X goal_description limited to 190 characters since we add stuff behind (but does it really matter if it goes beyond 255?)
 X Changed panel to use 3_rows_of_labels
 X When goal is reached, display something
+(brandonxavier) Added option to display graphic emote for next tip needed.
+
 (NEW) Option for descending tips
 (NEW) Update bottom panel when goal is reached
 (NEW) Don't update last_tip_username when tip was not counted

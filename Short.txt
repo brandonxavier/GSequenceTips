@@ -1,1 +1,1 @@
-Tips must come in the chosen order to reach the goal (ascending: 1, 2, 3,... ; descending: 10, 9, 8,...)
+Tips must come in the chosen order to reach the goal (ascending: 1, 2, 3,... ; descending: 10, 9, 8,...) Broadcaster has the option of displaying an emote for the next tip needed.

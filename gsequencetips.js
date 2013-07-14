@@ -4,22 +4,12 @@
  * Date: 7/14/13
  *
 
- Copyright 2013 Brandon Xavier (brandonxavier421@gmail.com)
-
- This file is part of GSequenceTips.
-
- GSequenceTips is free software: you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation, either version 3 of the License, or
- (at your option) any later version.
-
- GSequenceTips is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
-
- You should have received a copy of the GNU General Public License
- along with GSequenceTips.  If not, see <http://www.gnu.org/licenses/>.
+ * The vast majority of the credit for this goes to the original
+ * authors of the sequence tips app: Cliche123 and Nolidoux, and of
+ * course to the creators of the wonderful next[0-9]+ emotes.
+ *
+ * Emote (graphic) options added by brandonxavier
+ *
 
  */
 
@@ -36,7 +26,12 @@ cb.settings_choices = [
     { name: 'order', type: 'choice',
         choice1: 'ascending',
         choice2: 'descending',
-        default: 'ascending' }
+        default: 'ascending' },
+    { name: 'useGraphics', type: 'choice',
+        choice1: 'yes',
+        choice2: 'no',
+        default: 'yes',
+        label: 'Use next?? graphics'}
 ];
 
 
@@ -58,6 +53,20 @@ cb.onTip(
     }
 );
 
+cb.onMessage( function (msg) {
+    if ( msg['m'].match( /^\/gon/i ) != null ) {
+        msg['X-Spam'] = true;
+        cb.settings.useGraphics = "yes";
+        cb.chatNotice( "Graphics: On", cb.room_slug );
+    } else {
+        if ( msg['m'].match( /^\/goff/i ) != null ) {
+            msg['X-Spam'] = true;
+            cb.settings.useGraphics = "no";
+            cb.chatNotice( "Graphics: Off", cb.room_slug );
+        }
+    }
+    return msg;
+} );
 
 cb.onDrawPanel(
     function (user) {
@@ -115,6 +124,11 @@ function update_subject() {
     }
 
     cb.changeRoomSubject( new_subject );
+
+    if ( cb.settings.useGraphics == "yes" && !goal_reached ) {
+        cb.chatNotice( ":next" + next_tip_amount );
+    }
+
 }
 
 function format_username(val) {
@@ -152,8 +166,11 @@ function init() {
         next_tip_amount = cb.settings.goal_value;
     }
 
+    cb.chatNotice( "You can turn graphics on or off by typing /gon or /goff",
+        cb.room_slug );
+
     update_subject();
 }
 
-init();
-
+if ( !!AppDevKit == false )
+    init();
