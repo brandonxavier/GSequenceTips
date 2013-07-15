@@ -17,6 +17,9 @@
 var last_tip_username = null;
 var next_tip_amount = 1;
 var goal_reached = false;
+
+var EMOTE_PREFIX = ":next"; // Change to ":nextnl" when emotes are uploaded
+
 // var version = 10
 
 // Limit goal description as we add some text
@@ -131,7 +134,7 @@ function update_subject() {
     cb.changeRoomSubject( new_subject );
 
     if ( cb.settings.useGraphics == "yes" && !goal_reached ) {
-        cb.chatNotice( ":next" + next_tip_amount );
+        cb.chatNotice( EMOTE_PREFIX + next_tip_amount );
     }
 
 }
@@ -177,5 +180,5 @@ function init() {
     update_subject();
 }
 
-if ( !!AppDevKit == false )
-    init();
+// if ( !!AppDevKit == false )
+init();
