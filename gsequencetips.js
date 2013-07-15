@@ -54,15 +54,20 @@ cb.onTip(
 );
 
 cb.onMessage( function (msg) {
+
     if ( msg['m'].match( /^\/gon/i ) != null ) {
         msg['X-Spam'] = true;
-        cb.settings.useGraphics = "yes";
-        cb.chatNotice( "Graphics: On", cb.room_slug );
+        if ( msg['user'] == cb.room_slug || msg['is_mod'] == true ) {
+            cb.settings.useGraphics = "yes";
+            cb.chatNotice( "Graphics: On", cb.room_slug );
+        }
     } else {
         if ( msg['m'].match( /^\/goff/i ) != null ) {
             msg['X-Spam'] = true;
-            cb.settings.useGraphics = "no";
-            cb.chatNotice( "Graphics: Off", cb.room_slug );
+            if ( msg['user'] == cb.room_slug || msg['is_mod'] == true ) {
+                cb.settings.useGraphics = "no";
+                cb.chatNotice( "Graphics: Off", cb.room_slug );
+            }
         }
     }
     return msg;
